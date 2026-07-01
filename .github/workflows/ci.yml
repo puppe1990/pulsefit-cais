@@ -65,3 +65,6 @@ jobs:
 
       - name: Check formatting
         run: npx prettier --check .
+
+      - name: npm test
+        run: npm test

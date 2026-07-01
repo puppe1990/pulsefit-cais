@@ -27,3 +27,20 @@ build: css
 dev: css
 	$(MAKE) css-watch &
 	$(CAIS) dev
+
+# cais quality tooling
+.PHONY: lint format format-check pre-commit-install ci
+
+lint:
+	golangci-lint run ./...
+
+format:
+	npm run format
+
+format-check:
+	npm run format:check
+
+pre-commit-install:
+	pre-commit install
+
+ci: test lint format-check
