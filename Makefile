@@ -1,8 +1,16 @@
-.PHONY: dev build test css css-watch
+.PHONY: dev build test css css-watch install console
+
+CAIS := $(shell command -v cais 2>/dev/null || command -v $(HOME)/go/bin/cais 2>/dev/null)
 
 BIN := bin/server
 CSS_IN := input.css
 CSS_OUT := web/static/css/styles.css
+
+install:
+	$(CAIS) install
+
+console:
+	$(CAIS) console
 
 test:
 	go test ./... -race -count=1

@@ -58,6 +58,10 @@ func NewSQLiteStore(dsn string, env string) (*SQLiteStore, error) {
 	return &SQLiteStore{db: sqllog.Wrap(db, sqllog.Config{Enabled: sqllog.EnabledForEnv(env)})}, nil
 }
 
+func (s *SQLiteStore) DB() *sql.DB {
+	return s.db.Raw()
+}
+
 func (s *SQLiteStore) Close() error {
 	return s.db.Close()
 }
