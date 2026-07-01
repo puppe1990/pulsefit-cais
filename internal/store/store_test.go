@@ -9,7 +9,7 @@ import (
 
 func newTestStore(t *testing.T) *SQLiteStore {
 	t.Helper()
-	s, err := NewSQLiteStore(":memory:")
+	s, err := NewSQLiteStore(":memory:", "test")
 	if err != nil {
 		t.Fatal(err)
 	}

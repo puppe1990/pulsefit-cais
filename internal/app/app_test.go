@@ -25,7 +25,7 @@ func TestApp_StaticCSS_PublicWithoutAuth(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	st, err := store.NewSQLiteStore(":memory:")
+	st, err := store.NewSQLiteStore(":memory:", "test")
 	if err != nil {
 		t.Fatal(err)
 	}
