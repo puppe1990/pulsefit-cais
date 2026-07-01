@@ -1,8 +1,9 @@
-const CACHE = "cais-static-v2";
+const CACHE = "cais-static-v3";
 
 const PRECACHE = [
   "/static/css/styles.css",
   "/static/js/htmx.min.js",
+  "/static/js/cais.js",
   "/static/js/password-toggle.js",
   "/static/manifest.webmanifest",
   "/static/icons/icon.svg",

@@ -15,7 +15,9 @@
 <form
   hx-post="/workout/{{ .SessionID }}/set?ex={{ .ExerciseIndex }}"
   hx-target="#sets-panel"
-  hx-swap="innerHTML"
+  hx-swap="innerHTML swap:150ms"
+  hx-indicator="#set-spinner"
+  hx-disabled-elt="button[type='submit']"
   class="grid grid-cols-2 sm:grid-cols-3 gap-3 items-end"
 >
   <input type="hidden" name="exercise_log_id" value="{{ .ExerciseLogID }}" />
@@ -31,7 +33,10 @@
     <label class="flex items-center gap-2 text-xs text-white/60">
       <input type="checkbox" name="completed" value="1" class="accent-pulse-volt" /> Done
     </label>
-    <button type="submit" class="bg-pulse-volt text-black font-black py-2.5 sm:py-2 px-6 sm:px-0 rounded-lg text-xs uppercase">Log set</button>
+    <button type="submit" class="bg-pulse-volt text-black font-black py-2.5 sm:py-2 px-6 sm:px-0 rounded-lg text-xs uppercase">
+      <span class="htmx-indicator" id="set-spinner">Logging…</span>
+      <span class="htmx-request-hide">Log set</span>
+    </button>
   </div>
 </form>
 {{ end }}

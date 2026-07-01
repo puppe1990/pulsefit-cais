@@ -66,4 +66,30 @@
   .mobile-nav-link span:last-child {
     @apply text-[9px] font-black uppercase tracking-tighter italic leading-none truncate max-w-full;
   }
+
+  .htmx-swapping {
+    opacity: 0;
+    transition: opacity 150ms ease-out;
+  }
+
+  .htmx-settling {
+    opacity: 1;
+    transition: opacity 150ms ease-in;
+  }
+
+  form.htmx-request button[type="submit"] {
+    @apply opacity-60 pointer-events-none;
+  }
+
+  .htmx-indicator {
+    @apply hidden;
+  }
+
+  .htmx-request .htmx-indicator {
+    @apply inline-block;
+  }
+
+  .htmx-request .htmx-request-hide {
+    @apply hidden;
+  }
 }

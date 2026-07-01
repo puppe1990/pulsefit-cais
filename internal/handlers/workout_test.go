@@ -43,8 +43,14 @@ func TestWorkoutHandler_Show_andAddSet(t *testing.T) {
 	if rr.Code != http.StatusOK {
 		t.Fatalf("show status = %d", rr.Code)
 	}
-	if !strings.Contains(rr.Body.String(), "Log set") {
+	body := rr.Body.String()
+	if !strings.Contains(body, "Log set") {
 		t.Error("missing set form")
+	}
+	for _, needle := range []string{"swap:150ms", "hx-indicator", "set-spinner"} {
+		if !strings.Contains(body, needle) {
+			t.Errorf("workout page missing HTMX UX attribute %q", needle)
+		}
 	}
 
 	logs, _ := st.ListExerciseLogs(sessionID)
