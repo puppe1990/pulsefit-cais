@@ -24,8 +24,6 @@ css-watch:
 build: css
 	CGO_ENABLED=0 go build -ldflags="-s -w" -o $(BIN) ./cmd/server
 
-AIR := $(shell command -v $(HOME)/go/bin/air 2>/dev/null || command -v air 2>/dev/null)
-
 dev: css
 	$(MAKE) css-watch &
-	$(AIR) -c .air.toml
+	$(CAIS) dev
