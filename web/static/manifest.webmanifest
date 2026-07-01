@@ -3,7 +3,7 @@
   "short_name": "PulseFit",
   "description": "PulseFit — track workouts and routines",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#000000",
   "theme_color": "#CCFF00",
   "orientation": "portrait-primary",

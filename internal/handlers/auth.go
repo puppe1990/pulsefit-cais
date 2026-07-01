@@ -6,6 +6,7 @@ import (
 
 	"github.com/puppe1990/cais/pkg/cais"
 	"github.com/puppe1990/cais/pkg/cais/httpx"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/models"
 	"github.com/puppe1990/pulsefit/internal/store"
@@ -16,22 +17,25 @@ type AuthHandler struct {
 	store    store.Store
 	sessions session.Store
 	secure   bool
+	site     meta.Site
 }
 
 type LoginPageData struct {
+	meta.Site
 	Error string
 }
 
 type RegisterPageData struct {
+	meta.Site
 	Error string
 }
 
-func NewAuthHandler(renderer *cais.Renderer, st store.Store, sessions session.Store, secure bool) *AuthHandler {
-	return &AuthHandler{renderer: renderer, store: st, sessions: sessions, secure: secure}
+func NewAuthHandler(renderer *cais.Renderer, st store.Store, sessions session.Store, secure bool, site meta.Site) *AuthHandler {
+	return &AuthHandler{renderer: renderer, store: st, sessions: sessions, secure: secure, site: site}
 }
 
 func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
-	h.renderAuth(w, "login", LoginPageData{})
+	h.renderAuth(w, "login", LoginPageData{Site: h.site})
 }
 
 func (h *AuthHandler) LoginPost(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +48,7 @@ func (h *AuthHandler) LoginPost(w http.ResponseWriter, r *http.Request) {
 
 	u, err := h.store.FindUserByEmail(email)
 	if err != nil || !session.VerifyPassword(u.PasswordHash, password) {
-		h.renderAuth(w, "login", LoginPageData{Error: "Invalid email or password"})
+		h.renderAuth(w, "login", LoginPageData{Site: h.site, Error: "Invalid email or password"})
 		return
 	}
 
@@ -56,7 +60,7 @@ func (h *AuthHandler) LoginPost(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *AuthHandler) Register(w http.ResponseWriter, r *http.Request) {
-	h.renderAuth(w, "register", RegisterPageData{})
+	h.renderAuth(w, "register", RegisterPageData{Site: h.site})
 }
 
 func (h *AuthHandler) RegisterPost(w http.ResponseWriter, r *http.Request) {
@@ -72,7 +76,7 @@ func (h *AuthHandler) RegisterPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if email == "" || password == "" {
-		h.renderAuth(w, "register", RegisterPageData{Error: "Email and password are required"})
+		h.renderAuth(w, "register", RegisterPageData{Site: h.site, Error: "Email and password are required"})
 		return
 	}
 
@@ -89,7 +93,7 @@ func (h *AuthHandler) RegisterPost(w http.ResponseWriter, r *http.Request) {
 		PhotoURL:     "https://api.dicebear.com/7.x/avataaars/svg?seed=" + email,
 	})
 	if err != nil {
-		h.renderAuth(w, "register", RegisterPageData{Error: "Could not create account — email may already exist"})
+		h.renderAuth(w, "register", RegisterPageData{Site: h.site, Error: "Could not create account — email may already exist"})
 		return
 	}
 

@@ -9,9 +9,9 @@ import (
 func registerRoutes(r *cais.Router, deps Deps) {
 	r.Use(middleware.LoadSession(deps.SessionStore))
 
-	auth := handlers.NewAuthHandler(deps.Renderer, deps.Store, deps.SessionStore, deps.SecureCookie)
-	pages := handlers.NewPagesHandler(deps.Renderer, deps.Store)
-	workout := handlers.NewWorkoutHandler(deps.Renderer, deps.Store)
+	auth := handlers.NewAuthHandler(deps.Renderer, deps.Store, deps.SessionStore, deps.SecureCookie, deps.Site)
+	pages := handlers.NewPagesHandler(deps.Renderer, deps.Store, deps.Site)
+	workout := handlers.NewWorkoutHandler(deps.Renderer, deps.Store, deps.Site)
 
 	r.Get("/login", auth.Login)
 	r.Post("/login", auth.LoginPost)

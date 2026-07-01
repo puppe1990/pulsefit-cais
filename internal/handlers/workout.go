@@ -8,6 +8,7 @@ import (
 
 	"github.com/puppe1990/cais/pkg/cais"
 	"github.com/puppe1990/cais/pkg/cais/httpx"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/store"
 )
@@ -17,6 +18,7 @@ var errWorkoutNotFound = errors.New("workout not found")
 type WorkoutHandler struct {
 	renderer *cais.Renderer
 	store    store.Store
+	site     meta.Site
 }
 
 type WorkoutQueueItem struct {
@@ -62,8 +64,8 @@ type WorkoutSummaryData struct {
 	CompletedSets int
 }
 
-func NewWorkoutHandler(renderer *cais.Renderer, st store.Store) *WorkoutHandler {
-	return &WorkoutHandler{renderer: renderer, store: st}
+func NewWorkoutHandler(renderer *cais.Renderer, st store.Store, site meta.Site) *WorkoutHandler {
+	return &WorkoutHandler{renderer: renderer, store: st, site: site}
 }
 
 func (h *WorkoutHandler) Start(w http.ResponseWriter, r *http.Request, routineID string) {
@@ -181,7 +183,7 @@ func (h *WorkoutHandler) Summary(w http.ResponseWriter, r *http.Request, session
 	}
 	logs, _ := h.store.ListExerciseLogs(sid)
 
-	pages := NewPagesHandler(h.renderer, h.store)
+	pages := NewPagesHandler(h.renderer, h.store, h.site)
 	h.renderPage(w, "workout_summary", WorkoutSummaryData{
 		AppLayoutData: pages.layout(r, ""),
 		RoutineName:   summary.Session.RoutineName,
@@ -268,7 +270,7 @@ func (h *WorkoutHandler) buildWorkoutPage(r *http.Request, sessionID string) (Wo
 		nextURL = "/workout/" + sessionID + "?ex=" + strconv.Itoa(exIndex+1)
 	}
 
-	pages := NewPagesHandler(h.renderer, h.store)
+	pages := NewPagesHandler(h.renderer, h.store, h.site)
 	return WorkoutPageData{
 		AppLayoutData: pages.layout(r, ""),
 		SessionID:     sessionID,

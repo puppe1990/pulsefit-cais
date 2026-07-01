@@ -6,12 +6,14 @@ import (
 
 	"github.com/puppe1990/cais/pkg/cais"
 	"github.com/puppe1990/cais/pkg/cais/httpx"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/models"
 	"github.com/puppe1990/pulsefit/internal/store"
 )
 
 type AppLayoutData struct {
+	meta.Site
 	ActiveNav string
 	Profile   Profile
 }
@@ -57,10 +59,11 @@ type HistoryData struct {
 type PagesHandler struct {
 	renderer *cais.Renderer
 	store    store.Store
+	site     meta.Site
 }
 
-func NewPagesHandler(renderer *cais.Renderer, st store.Store) *PagesHandler {
-	return &PagesHandler{renderer: renderer, store: st}
+func NewPagesHandler(renderer *cais.Renderer, st store.Store, site meta.Site) *PagesHandler {
+	return &PagesHandler{renderer: renderer, store: st, site: site}
 }
 
 func (h *PagesHandler) layout(r *http.Request, active string) AppLayoutData {
@@ -70,7 +73,7 @@ func (h *PagesHandler) layout(r *http.Request, active string) AppLayoutData {
 			profile = Profile{DisplayName: u.DisplayName, PhotoURL: u.PhotoURL, Email: u.Email}
 		}
 	}
-	return AppLayoutData{ActiveNav: active, Profile: profile}
+	return AppLayoutData{Site: h.site, ActiveNav: active, Profile: profile}
 }
 
 func (h *PagesHandler) render(w http.ResponseWriter, layout, page string, data any) {

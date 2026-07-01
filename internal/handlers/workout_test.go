@@ -11,7 +11,7 @@ import (
 
 func TestWorkoutHandler_Start_redirects(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewWorkoutHandler(setupTestRenderer(t), st)
+	h := NewWorkoutHandler(setupTestRenderer(t), st, testSite())
 	uID := demoUserID(t, st)
 	routines, _ := st.ListRoutinesByUser(uID)
 	rid := strconv.FormatInt(routines[0].ID, 10)
@@ -29,7 +29,7 @@ func TestWorkoutHandler_Start_redirects(t *testing.T) {
 
 func TestWorkoutHandler_Show_andAddSet(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewWorkoutHandler(setupTestRenderer(t), st)
+	h := NewWorkoutHandler(setupTestRenderer(t), st, testSite())
 	uID := demoUserID(t, st)
 	routines, _ := st.ListRoutinesByUser(uID)
 	sessionID, err := st.StartWorkout(uID, routines[0].ID)
@@ -69,7 +69,7 @@ func TestWorkoutHandler_Show_andAddSet(t *testing.T) {
 
 func TestWorkoutHandler_Finish_andSummary(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewWorkoutHandler(setupTestRenderer(t), st)
+	h := NewWorkoutHandler(setupTestRenderer(t), st, testSite())
 	uID := demoUserID(t, st)
 	routines, _ := st.ListRoutinesByUser(uID)
 	sessionID, _ := st.StartWorkout(uID, routines[0].ID)
@@ -93,7 +93,7 @@ func TestWorkoutHandler_Finish_andSummary(t *testing.T) {
 
 func TestPagesHandler_RoutineCreatePost(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewPagesHandler(setupTestRenderer(t), st)
+	h := NewPagesHandler(setupTestRenderer(t), st, testSite())
 	exercises, _ := st.ListExercises()
 
 	form := url.Values{"name": {"My Test Routine"}, "exercise_id": {strconv.FormatInt(exercises[0].ID, 10)}}

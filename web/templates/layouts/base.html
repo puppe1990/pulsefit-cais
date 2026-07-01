@@ -1,10 +1,23 @@
+{{ define "title" }}PulseFit{{ end }}
+{{ define "description" }}PulseFit — log workouts with rhythm{{ end }}
 {{ define "auth" }}
 <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{{ template "title" . }}</title>
+    <meta name="description" content="{{ template "description" . }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PulseFit" />
+    <meta property="og:title" content="{{ template "title" . }}" />
+    <meta property="og:description" content="{{ template "description" . }}" />
+    <meta property="og:image" content="{{ absURL .AppURL "/static/og.png" }}" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ template "title" . }}" />
+    <meta name="twitter:description" content="{{ template "description" . }}" />
+    <meta name="twitter:image" content="{{ absURL .AppURL "/static/og.png" }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -13,6 +26,8 @@
     <link rel="icon" href="/static/icons/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
     <meta name="theme-color" content="#CCFF00" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <script src="/static/js/htmx.min.js" defer></script>
   </head>
   <body class="bg-pulse-black text-pulse-gray min-h-screen">
@@ -26,8 +41,19 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>{{ template "title" . }}</title>
+    <meta name="description" content="{{ template "description" . }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PulseFit" />
+    <meta property="og:title" content="{{ template "title" . }}" />
+    <meta property="og:description" content="{{ template "description" . }}" />
+    <meta property="og:image" content="{{ absURL .AppURL "/static/og.png" }}" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ template "title" . }}" />
+    <meta name="twitter:description" content="{{ template "description" . }}" />
+    <meta name="twitter:image" content="{{ absURL .AppURL "/static/og.png" }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -37,6 +63,9 @@
     <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
     <link rel="manifest" href="/static/manifest.webmanifest" />
     <meta name="theme-color" content="#CCFF00" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PulseFit" />
     <script src="/static/js/htmx.min.js" defer></script>
   </head>

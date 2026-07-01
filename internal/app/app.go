@@ -10,6 +10,7 @@ import (
 
 	"github.com/puppe1990/cais/pkg/cais"
 	"github.com/puppe1990/cais/pkg/cais/devlog"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/cais/pkg/cais/middleware"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/store"
@@ -21,6 +22,7 @@ type Deps struct {
 	SessionStore session.Store
 	SecureCookie bool
 	StaticDir    string
+	Site         meta.Site
 }
 
 type App struct {

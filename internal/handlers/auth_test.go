@@ -15,7 +15,7 @@ func setupAuthHandler(t *testing.T) (*AuthHandler, *store.SQLiteStore) {
 	t.Helper()
 	st := setupTestSQLiteStore(t)
 	sessions := store.NewSessionStore(st)
-	return NewAuthHandler(setupTestRenderer(t), st, sessions, false), st
+	return NewAuthHandler(setupTestRenderer(t), st, sessions, false, testSite()), st
 }
 
 func TestAuthHandler_LoginPost_success(t *testing.T) {

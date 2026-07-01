@@ -9,6 +9,7 @@ import (
 
 	"github.com/puppe1990/cais/pkg/cais"
 	"github.com/puppe1990/cais/pkg/cais/boot"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/pulsefit/internal/app"
 	"github.com/puppe1990/pulsefit/internal/store"
 	"github.com/puppe1990/pulsefit/web"
@@ -79,6 +80,7 @@ func bootstrapWithConfig(cfg cais.Config) (*app.App, error) {
 		SessionStore: store.NewSessionStore(s),
 		SecureCookie: cfg.Env == "production",
 		StaticDir:    staticDir,
+		Site:         meta.SiteFrom("PulseFit", cfg.AppURL),
 	})
 }
 

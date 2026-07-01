@@ -7,10 +7,15 @@ import (
 	"testing"
 
 	"github.com/puppe1990/cais/pkg/cais"
+	"github.com/puppe1990/cais/pkg/cais/meta"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/cais/pkg/cais/testutil"
 	"github.com/puppe1990/pulsefit/internal/store"
 )
+
+func testSite() meta.Site {
+	return meta.Site{AppName: "PulseFit", AppURL: "https://pulsefit.gestaobem.com"}
+}
 
 func setupTestRenderer(t *testing.T) *cais.Renderer {
 	t.Helper()

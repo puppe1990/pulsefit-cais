@@ -10,7 +10,7 @@ import (
 
 func TestPagesHandler_AllRoutes(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewPagesHandler(setupTestRenderer(t), st)
+	h := NewPagesHandler(setupTestRenderer(t), st, testSite())
 	tests := []struct {
 		name string
 		fn   func(http.ResponseWriter, *http.Request)
@@ -39,7 +39,7 @@ func TestPagesHandler_AllRoutes(t *testing.T) {
 
 func TestPagesHandler_RoutineDetail(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewPagesHandler(setupTestRenderer(t), st)
+	h := NewPagesHandler(setupTestRenderer(t), st, testSite())
 
 	uID := demoUserID(t, st)
 	routines, err := st.ListRoutinesByUser(uID)
@@ -60,7 +60,7 @@ func TestPagesHandler_RoutineDetail(t *testing.T) {
 
 func TestPagesHandler_Dashboard_showsDemoRoutines(t *testing.T) {
 	st := setupTestStore(t)
-	h := NewPagesHandler(setupTestRenderer(t), st)
+	h := NewPagesHandler(setupTestRenderer(t), st, testSite())
 
 	rr := httptest.NewRecorder()
 	h.Dashboard(rr, authedRequest(t, st, http.MethodGet, "/"))
