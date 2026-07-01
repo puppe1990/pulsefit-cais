@@ -27,6 +27,8 @@ Unauthenticated visits redirect to `/login`.
 ## Quick start
 
 ```bash
+git clone https://github.com/puppe1990/pulsefit-cais.git
+cd pulsefit-cais
 npm install
 make css       # build Tailwind
 make dev       # http://localhost:8080
