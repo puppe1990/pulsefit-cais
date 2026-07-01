@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/puppe1990/cais/pkg/cais"
+	"github.com/puppe1990/cais/pkg/cais/middleware"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/store"
 )
@@ -38,6 +39,10 @@ func New(cfg cais.Config, deps Deps) (*App, error) {
 	}
 
 	r := cais.NewRouter()
+	if cfg.Env == "development" {
+		r.Use(middleware.Recover)
+		r.Use(middleware.Logger)
+	}
 	r.Static("/static", deps.StaticDir)
 	registerRoutes(r, deps)
 	r.Get("/health", healthHandler)

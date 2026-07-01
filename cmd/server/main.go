@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/puppe1990/cais/pkg/cais"
+	"github.com/puppe1990/cais/pkg/cais/boot"
 	"github.com/puppe1990/pulsefit/internal/app"
 	"github.com/puppe1990/pulsefit/internal/store"
 	"github.com/puppe1990/pulsefit/web"
@@ -20,7 +21,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Printf("pulsefit rodando na porta %s...", cfg.Port)
+	boot.Print(os.Stdout, boot.Options{
+		AppName: "PulseFit",
+		Config:  cfg,
+		Version: boot.CaisVersion(),
+	})
 	if err := a.Run(); err != nil {
 		log.Fatal(err)
 	}

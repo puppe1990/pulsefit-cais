@@ -2,15 +2,18 @@ root = "."
 tmp_dir = "tmp"
 
 [build]
+  entrypoint = "./cmd/server"
   cmd = "go build -o ./tmp/main ./cmd/server"
   bin = "./tmp/main"
   delay = 1000
   exclude_dir = ["tmp", "data", "bin", "node_modules"]
   include_ext = ["go", "html"]
   stop_on_error = true
+  log = "build_errors"
 
 [log]
   time = false
 
 [misc]
   clean_on_exit = true
+  log = "main_only"
