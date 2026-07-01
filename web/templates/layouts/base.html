@@ -1,0 +1,102 @@
+{{ define "auth" }}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ template "title" . }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <meta name="theme-color" content="#000000" />
+    <script src="/static/js/htmx.min.js" defer></script>
+  </head>
+  <body class="bg-pulse-black text-pulse-gray min-h-screen">
+    {{ template "content" . }}
+  </body>
+</html>
+{{ end }}
+
+{{ define "base" }}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ template "title" . }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/styles.css" />
+    <link rel="manifest" href="/static/manifest.webmanifest" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="apple-mobile-web-app-title" content="PulseFit" />
+    <script src="/static/js/htmx.min.js" defer></script>
+  </head>
+  <body class="bg-pulse-black text-pulse-gray h-screen overflow-hidden flex flex-col">
+    <div class="flex flex-1 overflow-hidden relative">
+      <aside class="hidden md:flex w-60 bg-black flex-col h-full p-6 text-pulse-muted border-r border-white/5 font-semibold flex-shrink-0">
+        <div class="mb-8 px-2 flex items-center gap-3">
+          <div class="w-8 h-8 bg-pulse-volt rounded-full flex items-center justify-center text-black text-sm">📚</div>
+          <a href="/" class="text-white text-xl font-bold tracking-tight">PulseFit</a>
+        </div>
+        <nav class="space-y-5 mb-8">
+          <a href="/" class="flex items-center gap-4 hover:text-white transition-all {{ if eq .ActiveNav "home" }}text-white{{ else }}opacity-70 hover:opacity-100{{ end }}">
+            <span class="{{ if eq .ActiveNav "home" }}text-pulse-volt{{ end }}">🏠</span><span>Home</span>
+          </a>
+          <a href="/search" class="flex items-center gap-4 hover:text-white transition-all {{ if eq .ActiveNav "search" }}text-white{{ else }}opacity-70 hover:opacity-100{{ end }}">
+            <span class="{{ if eq .ActiveNav "search" }}text-pulse-volt{{ end }}">🔍</span><span>Search</span>
+          </a>
+          <a href="/library" class="flex items-center gap-4 hover:text-white transition-all {{ if eq .ActiveNav "library" }}text-white{{ else }}opacity-70 hover:opacity-100{{ end }}">
+            <span class="{{ if eq .ActiveNav "library" }}text-pulse-volt{{ end }}">📚</span><span>Library</span>
+          </a>
+        </nav>
+        <div class="space-y-4">
+          <h2 class="px-2 text-[10px] uppercase tracking-[0.2em] font-black text-white/30 mb-2">My Routines</h2>
+          <a href="/routine/new" class="flex items-center gap-4 hover:text-white transition-colors {{ if eq .ActiveNav "routine_new" }}text-white{{ else }}opacity-70 hover:opacity-100{{ end }}">
+            <div class="w-6 h-6 rounded-sm flex items-center justify-center bg-white text-black text-xs">+</div>
+            <span>Create Routine</span>
+          </a>
+          <a href="/history" class="flex items-center gap-4 hover:text-white transition-colors {{ if eq .ActiveNav "history" }}text-white{{ else }}opacity-70 hover:opacity-100{{ end }}">
+            <div class="w-6 h-6 rounded-sm flex items-center justify-center bg-pulse-volt/20 text-pulse-volt text-xs">⏱</div>
+            <span>History</span>
+          </a>
+        </div>
+        <div class="mt-auto pt-6 border-t border-white/10">
+          <div class="flex items-center gap-3 px-2 mb-4">
+            <img src="{{ .Profile.PhotoURL }}" alt="{{ .Profile.DisplayName }}" class="w-10 h-10 rounded-full object-cover" />
+            <div class="flex flex-col min-w-0">
+              <span class="text-white text-sm truncate w-32">{{ .Profile.DisplayName }}</span>
+              <span class="text-xs opacity-50 truncate w-32">{{ .Profile.Email }}</span>
+            </div>
+          </div>
+          <form method="post" action="/logout">
+            <button type="submit" class="w-full text-left px-2 text-xs text-white/40 hover:text-white uppercase tracking-widest font-bold transition-colors">Log out</button>
+          </form>
+        </div>
+      </aside>
+      <main class="flex-1 overflow-y-auto immersive-gradient pb-24 md:pb-0">
+        {{ template "content" . }}
+      </main>
+    </div>
+    <nav class="md:hidden border-t border-white/5 bg-black/80 backdrop-blur-xl fixed bottom-0 left-0 right-0 z-50 flex items-center justify-around h-20 px-2">
+      <a href="/" class="flex flex-col items-center gap-1.5 min-w-[64px] {{ if eq .ActiveNav "home" }}text-pulse-volt{{ else }}text-white/40{{ end }}">
+        <span class="text-lg">🏠</span><span class="text-[10px] font-black uppercase tracking-tighter italic">Home</span>
+      </a>
+      <a href="/search" class="flex flex-col items-center gap-1.5 min-w-[64px] {{ if eq .ActiveNav "search" }}text-pulse-volt{{ else }}text-white/40{{ end }}">
+        <span class="text-lg">🔍</span><span class="text-[10px] font-black uppercase tracking-tighter italic">Search</span>
+      </a>
+      <a href="/library" class="flex flex-col items-center gap-1.5 min-w-[64px] {{ if eq .ActiveNav "library" }}text-pulse-volt{{ else }}text-white/40{{ end }}">
+        <span class="text-lg">📚</span><span class="text-[10px] font-black uppercase tracking-tighter italic">Library</span>
+      </a>
+      <a href="/routine/new" class="flex flex-col items-center gap-1.5 min-w-[64px] {{ if eq .ActiveNav "routine_new" }}text-pulse-volt{{ else }}text-white/40{{ end }}">
+        <span class="text-lg">+</span><span class="text-[10px] font-black uppercase tracking-tighter italic">New</span>
+      </a>
+      <a href="/history" class="flex flex-col items-center gap-1.5 min-w-[64px] {{ if eq .ActiveNav "history" }}text-pulse-volt{{ else }}text-white/40{{ end }}">
+        <span class="text-lg">⏱</span><span class="text-[10px] font-black uppercase tracking-tighter italic">History</span>
+      </a>
+    </nav>
+  </body>
+</html>
+{{ end }}

@@ -1,0 +1,29 @@
+{{ define "title" }}Register — PulseFit{{ end }}
+{{ define "content" }}
+<div class="flex flex-col items-center justify-center min-h-screen bg-black p-4 relative overflow-hidden">
+  <div class="absolute top-1/4 -left-20 w-80 h-80 bg-pulse-volt/10 blur-[120px] rounded-full"></div>
+  <div class="w-full max-w-sm relative z-10 glass-morphism rounded-2xl p-8">
+    <h1 class="text-3xl font-black uppercase italic text-white mb-2">Create account</h1>
+    <p class="text-pulse-muted text-sm mb-6">Email + password</p>
+    {{ if .Error }}
+    <p class="text-red-400 text-sm mb-4">{{ .Error }}</p>
+    {{ end }}
+    <form class="space-y-4" action="/register" method="post">
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-white/50 mb-1" for="display_name">Display name</label>
+        <input class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pulse-volt/50" type="text" id="display_name" name="display_name" placeholder="Your name" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-white/50 mb-1" for="email">Email</label>
+        <input class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pulse-volt/50" type="email" id="email" name="email" required placeholder="you@example.com" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-white/50 mb-1" for="password">Password</label>
+        <input class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pulse-volt/50" type="password" id="password" name="password" required minlength="4" />
+      </div>
+      <button type="submit" class="w-full bg-pulse-volt text-black font-black py-3 rounded-full hover:scale-105 transition-transform">Sign up</button>
+    </form>
+    <p class="mt-6 text-center text-sm text-pulse-muted">Already have an account? <a href="/login" class="text-pulse-volt hover:underline">Log in</a></p>
+  </div>
+</div>
+{{ end }}

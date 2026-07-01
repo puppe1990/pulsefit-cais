@@ -1,0 +1,73 @@
+{{ define "title" }}Create Routine — PulseFit{{ end }}
+{{ define "content" }}
+<div class="flex flex-col min-h-full p-4 md:p-8 max-w-4xl mx-auto pb-32">
+  <a href="/" class="inline-flex items-center gap-2 text-white/40 hover:text-white text-[10px] md:text-xs font-black uppercase tracking-widest italic mb-6 md:mb-8 transition-colors">← Back</a>
+
+  <div class="mb-8 md:mb-12">
+    <h1 class="text-3xl md:text-5xl font-black italic uppercase tracking-tighter text-white mb-2 leading-none">
+      Forge New <span class="text-pulse-volt">Routine</span>
+    </h1>
+    <p class="text-xs md:text-sm text-white/40 font-medium">Design your next high-performance session.</p>
+  </div>
+
+  <form class="space-y-8 md:space-y-12" action="/routine/new" method="post">
+    <div class="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-8 md:gap-12">
+      <div class="space-y-4">
+        <div class="aspect-square bg-white/5 rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center">
+          <div class="flex flex-col items-center gap-2 text-white/20">
+            <span class="text-3xl">🖼</span>
+            <span class="text-[8px] md:text-[10px] font-black uppercase tracking-widest">No Image</span>
+          </div>
+        </div>
+        <p class="text-[8px] md:text-[10px] text-white/20 font-black uppercase tracking-widest text-center">Routine Cover</p>
+      </div>
+
+      <div class="space-y-4 md:space-y-6">
+        <div class="space-y-2">
+          <label class="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/40 italic">Routine Name</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Routine Name"
+            class="w-full bg-transparent border-b-2 border-white/10 focus:border-pulse-volt py-3 md:py-4 text-xl md:text-3xl font-black text-white focus:outline-none transition-colors uppercase placeholder:text-white/5 italic"
+          />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-white/40 italic">Description</label>
+          <textarea
+            name="description"
+            placeholder="Goals, focus, etc..."
+            rows="3"
+            class="w-full bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 text-xs md:text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-pulse-volt transition-all resize-none font-medium"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4 md:space-y-6">
+      <h2 class="text-lg md:text-xl font-black italic uppercase tracking-tight text-white">Select Exercises</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 max-h-[400px] overflow-y-auto pr-2">
+        {{ range .Exercises }}
+        <label class="flex items-center gap-3 md:gap-4 p-2 md:p-3 rounded-xl border bg-white/5 border-white/5 hover:border-pulse-volt/40 transition-all cursor-pointer has-[:checked]:border-pulse-volt has-[:checked]:bg-pulse-volt/10">
+          <input type="checkbox" name="exercise_id" value="{{ .ID }}" class="accent-pulse-volt" />
+          <img src="{{ .ImageURL }}" alt="{{ .Name }}" class="w-10 h-10 md:w-12 md:h-12 rounded-lg object-cover" />
+          <div class="flex-1 min-w-0">
+            <span class="block font-bold text-white text-xs md:text-sm truncate">{{ .Name }}</span>
+            <span class="text-[8px] md:text-[10px] font-black uppercase tracking-wider text-white/40 truncate block">{{ .MuscleGroup }}</span>
+          </div>
+        </label>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="pt-6 md:pt-8 border-t border-white/10 flex justify-center md:justify-end">
+      <button
+        type="submit"
+        class="flex items-center justify-center gap-3 w-full sm:w-auto px-8 md:px-12 py-4 md:py-5 bg-pulse-volt text-black rounded-full font-black uppercase italic tracking-widest text-xs md:text-sm hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(204,255,0,0.3)]"
+      >
+        Create Routine
+      </button>
+    </div>
+  </form>
+</div>
+{{ end }}

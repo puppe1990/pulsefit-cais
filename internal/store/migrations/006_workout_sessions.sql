@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS workout_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    routine_id INTEGER REFERENCES routines(id) ON DELETE SET NULL,
+    routine_name TEXT NOT NULL,
+    started_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    completed_at DATETIME,
+    duration_seconds INTEGER NOT NULL DEFAULT 0
+);

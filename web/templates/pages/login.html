@@ -1,0 +1,31 @@
+{{ define "title" }}Login — PulseFit{{ end }}
+{{ define "content" }}
+<div class="flex flex-col items-center justify-center min-h-screen bg-black p-4 text-center relative overflow-hidden">
+  <div class="absolute top-1/4 -left-20 w-80 h-80 bg-pulse-volt/10 blur-[120px] rounded-full"></div>
+  <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-blue-500/5 blur-[120px] rounded-full"></div>
+  <div class="mb-8 relative z-10">
+    <div class="w-24 h-24 bg-pulse-volt rounded-3xl flex items-center justify-center text-black mx-auto mb-8 shadow-[0_0_60px_rgba(204,255,0,0.25)] -rotate-3 text-5xl">⚡</div>
+    <h1 class="text-6xl font-black mb-4 tracking-tighter uppercase italic text-white leading-none">PulseFit</h1>
+    <p class="text-pulse-muted max-w-sm mx-auto text-lg font-medium leading-relaxed">Log workouts with rhythm.</p>
+  </div>
+  <div class="w-full max-w-xs relative z-10 glass-morphism rounded-2xl p-6 text-left">
+    {{ if .Error }}
+    <p class="text-red-400 text-sm mb-4 text-center">{{ .Error }}</p>
+    {{ end }}
+    <form method="post" action="/login" class="space-y-4">
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-white/50 mb-1" for="email">Email</label>
+        <input class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pulse-volt/50" type="email" id="email" name="email" required placeholder="demo@pulsefit.local" />
+      </div>
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-white/50 mb-1" for="password">Password</label>
+        <input class="w-full bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pulse-volt/50" type="password" id="password" name="password" required />
+      </div>
+      <button type="submit" class="w-full bg-pulse-volt hover:bg-[#d9ff33] text-black font-black py-4 rounded-full transition-all shadow-xl shadow-pulse-volt/20">Log in</button>
+    </form>
+    <p class="mt-4 text-center text-xs text-pulse-muted">Demo: <span class="text-white/60">demo@pulsefit.local</span> / <span class="text-white/60">demo</span></p>
+    <p class="mt-4 text-center text-sm text-pulse-muted">No account? <a href="/register" class="text-pulse-volt hover:underline">Create one</a></p>
+  </div>
+  <p class="mt-12 text-[10px] text-white uppercase tracking-[0.4em] font-black italic opacity-30 relative z-10">PulseFit Systems • Est. 2026</p>
+</div>
+{{ end }}

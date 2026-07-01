@@ -1,0 +1,24 @@
+{{ define "title" }}Library — PulseFit{{ end }}
+{{ define "content" }}
+<div class="p-4 md:p-8">
+  <header class="mb-8">
+    <h1 class="text-3xl md:text-5xl font-black italic uppercase tracking-tighter text-white">Exercise <span class="text-pulse-volt">Library</span></h1>
+    <p class="text-sm text-white/40 font-medium mt-2">{{ len .Exercises }} exercises available</p>
+  </header>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{ range .Exercises }}
+    <div class="bg-pulse-card rounded-xl overflow-hidden border border-white/5 hover:border-white/10 transition-all group">
+      <div class="aspect-video relative overflow-hidden">
+        <img src="{{ .ImageURL }}" alt="{{ .Name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-pulse-volt text-[10px] font-black uppercase px-2 py-1 rounded">{{ .MuscleGroup }}</span>
+      </div>
+      <div class="p-4">
+        <h3 class="font-bold text-white mb-1">{{ .Name }}</h3>
+        <p class="text-xs text-pulse-muted mb-2">{{ .Equipment }}</p>
+        <p class="text-sm text-white/50 line-clamp-2">{{ .Instructions }}</p>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

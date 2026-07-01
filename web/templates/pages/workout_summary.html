@@ -1,0 +1,28 @@
+{{ define "title" }}Workout Complete — PulseFit{{ end }}
+{{ define "content" }}
+<div class="p-4 md:p-8 pb-32 flex flex-col items-center justify-center min-h-[70vh] text-center">
+  <div class="w-24 h-24 bg-pulse-volt rounded-full flex items-center justify-center text-black text-5xl mb-8 shadow-[0_0_60px_rgba(204,255,0,0.3)]">✓</div>
+  <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-2">Workout <span class="text-pulse-volt">Complete</span></h1>
+  <p class="text-pulse-muted mb-10">{{ .RoutineName }}</p>
+
+  <div class="grid grid-cols-3 gap-6 md:gap-10 mb-12 w-full max-w-lg">
+    <div class="bg-white/5 rounded-2xl p-6 border border-white/5">
+      <p class="text-3xl font-black text-white">{{ .Duration }}</p>
+      <p class="text-[10px] uppercase tracking-widest text-white/40 mt-1">Duration</p>
+    </div>
+    <div class="bg-white/5 rounded-2xl p-6 border border-white/5">
+      <p class="text-3xl font-black text-white">{{ .ExerciseCount }}</p>
+      <p class="text-[10px] uppercase tracking-widest text-white/40 mt-1">Exercises</p>
+    </div>
+    <div class="bg-white/5 rounded-2xl p-6 border border-white/5">
+      <p class="text-3xl font-black text-pulse-volt">{{ .CompletedSets }}/{{ .TotalSets }}</p>
+      <p class="text-[10px] uppercase tracking-widest text-white/40 mt-1">Sets</p>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <a href="/history" class="bg-pulse-volt text-black font-black py-3 px-10 rounded-full hover:scale-105 transition-transform text-sm uppercase italic">View History</a>
+    <a href="/" class="border border-white/20 text-white font-bold py-3 px-10 rounded-full hover:scale-105 transition-transform text-sm">Dashboard</a>
+  </div>
+</div>
+{{ end }}

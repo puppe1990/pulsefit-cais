@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-pulse-black text-pulse-gray antialiased font-sans;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-1.5;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/20;
+  }
+}
+
+.immersive-gradient {
+  background: linear-gradient(to bottom, #1a1a1a, #121212);
+}
+
+.glass-morphism {
+  @apply bg-white/5 backdrop-blur-md border border-white/5;
+}
