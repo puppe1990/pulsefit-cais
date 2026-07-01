@@ -38,6 +38,7 @@ func New(cfg cais.Config, deps Deps) (*App, error) {
 	}
 
 	r := cais.NewRouter()
+	r.Static("/static", deps.StaticDir)
 	registerRoutes(r, deps)
 	r.Get("/health", healthHandler)
 
