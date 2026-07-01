@@ -1,11 +1,11 @@
 {{ define "title" }}{{ .Routine.Name }} — PulseFit{{ end }}
 {{ define "content" }}
-<div class="p-4 md:p-8 pb-32">
-  <a href="/" class="inline-flex items-center gap-2 text-pulse-muted hover:text-white text-sm mb-6 transition-colors">← Back</a>
-  <div class="flex flex-col md:flex-row gap-8 mb-10">
-    <div class="w-full md:w-64 h-64 {{ .Routine.Color }} rounded-2xl flex items-center justify-center text-8xl shadow-2xl flex-shrink-0">{{ .Routine.Emoji }}</div>
-    <div class="flex-1">
-      <h1 class="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-4">{{ .Routine.Name }}</h1>
+<div class="px-4 py-5 sm:p-6 md:p-8">
+  <a href="/" class="inline-flex items-center gap-2 text-pulse-muted hover:text-white text-sm mb-5 md:mb-6 transition-colors">← Back</a>
+  <div class="flex flex-col md:flex-row gap-5 md:gap-8 mb-8 md:mb-10">
+    <div class="w-full md:w-64 aspect-square max-h-56 sm:max-h-none md:h-64 {{ .Routine.Color }} rounded-2xl flex items-center justify-center text-6xl sm:text-7xl md:text-8xl shadow-2xl flex-shrink-0 mx-auto md:mx-0">{{ .Routine.Emoji }}</div>
+    <div class="flex-1 text-center md:text-left">
+      <h1 class="text-2xl sm:text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-3 md:mb-4 break-words">{{ .Routine.Name }}</h1>
       <p class="text-pulse-muted mb-6 max-w-xl">Optimized training session designed for maximum efficiency and growth.</p>
       <div class="flex flex-wrap gap-3 text-xs font-bold uppercase tracking-wider text-white/40 mb-8">
         <span>{{ len .Exercises }} exercises</span>
@@ -13,7 +13,7 @@
         <span>~45 min</span>
       </div>
       <form method="post" action="/routine/{{ .Routine.ID }}/start">
-        <button type="submit" class="bg-pulse-volt text-black font-black py-4 px-10 rounded-full hover:scale-105 transition-transform shadow-xl shadow-pulse-volt/20 text-sm tracking-widest uppercase italic">Start Workout</button>
+        <button type="submit" class="w-full sm:w-auto bg-pulse-volt text-black font-black py-3.5 sm:py-4 px-8 sm:px-10 rounded-full hover:scale-105 transition-transform shadow-xl shadow-pulse-volt/20 text-sm tracking-widest uppercase italic">Start Workout</button>
       </form>
     </div>
   </div>

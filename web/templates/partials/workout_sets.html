@@ -16,7 +16,7 @@
   hx-post="/workout/{{ .SessionID }}/set?ex={{ .ExerciseIndex }}"
   hx-target="#sets-panel"
   hx-swap="innerHTML"
-  class="grid grid-cols-3 gap-3 items-end"
+  class="grid grid-cols-2 sm:grid-cols-3 gap-3 items-end"
 >
   <input type="hidden" name="exercise_log_id" value="{{ .ExerciseLogID }}" />
   <div>
@@ -27,11 +27,11 @@
     <label class="text-[10px] uppercase text-white/40 font-bold">Reps</label>
     <input name="reps" type="number" min="0" class="w-full bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-white" placeholder="0" />
   </div>
-  <div class="flex flex-col gap-2">
+  <div class="col-span-2 sm:col-span-1 flex sm:flex-col items-center sm:items-stretch justify-between sm:justify-start gap-3 sm:gap-2">
     <label class="flex items-center gap-2 text-xs text-white/60">
       <input type="checkbox" name="completed" value="1" class="accent-pulse-volt" /> Done
     </label>
-    <button type="submit" class="bg-pulse-volt text-black font-black py-2 rounded-lg text-xs uppercase">Log set</button>
+    <button type="submit" class="bg-pulse-volt text-black font-black py-2.5 sm:py-2 px-6 sm:px-0 rounded-lg text-xs uppercase">Log set</button>
   </div>
 </form>
 {{ end }}
