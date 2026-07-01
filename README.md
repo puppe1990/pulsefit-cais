@@ -29,15 +29,15 @@ Unauthenticated visits redirect to `/login`.
 ```bash
 git clone https://github.com/puppe1990/pulsefit-cais.git
 cd pulsefit-cais
-npm install
-make css       # build Tailwind
-make dev       # http://localhost:8080
-make test      # full test suite
+go install github.com/puppe1990/cais/cmd/cais@v0.3.1
+cais install   # npm install + go mod tidy
+cais dev       # http://localhost:8080
+cais test      # full test suite
 ```
 
 ## Stack
 
-- **Go** + [Cais](https://github.com/puppe1990/cais) v0.3.0 (session auth, HTMX, renderer)
+- **Go** + [Cais](https://github.com/puppe1990/cais) v0.3.1 (session auth, HTMX, CLI app commands)
 - **SQLite** via `modernc.org/sqlite`
 - **Tailwind CSS** v3
 
