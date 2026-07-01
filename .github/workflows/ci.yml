@@ -21,6 +21,16 @@ jobs:
           go-version-file: go.mod
           cache: true
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build CSS
+        run: make css
+
       - name: Run tests
         run: go test ./... -race -count=1 -v
 
