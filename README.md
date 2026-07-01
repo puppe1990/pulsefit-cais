@@ -10,19 +10,19 @@ Unauthenticated visits redirect to `/login`.
 
 ## Pages
 
-| Route | Page |
-|-------|------|
-| `/login` | Login (POST email + password) |
-| `/register` | Register (POST) |
-| `POST /logout` | End session |
-| `/` | Dashboard |
-| `/search` | Browse categories |
-| `/library` | Exercise library |
-| `/routine/new` | Create routine (POST with exercise checkboxes) |
-| `/routine/{id}` | Routine detail + Start Workout |
-| `/workout/{id}` | Live workout logger (HTMX sets) |
-| `/workout/{id}/summary` | Post-workout summary |
-| `/history` | Workout history |
+| Route                   | Page                                           |
+| ----------------------- | ---------------------------------------------- |
+| `/login`                | Login (POST email + password)                  |
+| `/register`             | Register (POST)                                |
+| `POST /logout`          | End session                                    |
+| `/`                     | Dashboard                                      |
+| `/search`               | Browse categories                              |
+| `/library`              | Exercise library                               |
+| `/routine/new`          | Create routine (POST with exercise checkboxes) |
+| `/routine/{id}`         | Routine detail + Start Workout                 |
+| `/workout/{id}`         | Live workout logger (HTMX sets)                |
+| `/workout/{id}/summary` | Post-workout summary                           |
+| `/history`              | Workout history                                |
 
 ## Quick start
 
