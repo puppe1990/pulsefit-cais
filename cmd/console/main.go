@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	"github.com/puppe1990/cais/pkg/cais"
@@ -8,24 +9,47 @@ import (
 	"github.com/puppe1990/pulsefit/internal/store"
 )
 
+func openStore(cfg cais.Config) (*store.SQLiteStore, error) {
+	s, err := store.NewSQLiteStore(cfg.DBPath, cfg.Env)
+	if err != nil {
+		return nil, err
+	}
+	if err := s.SeedDemo(); err != nil {
+		_ = s.Close()
+		return nil, err
+	}
+	return s, nil
+}
+
+func bindings(s *store.SQLiteStore) map[string]any {
+	return map[string]any{
+		"store": s,
+		"db":    s.DB(),
+		"ctx":   context.Background(),
+	}
+}
+
 func main() {
 	cfg := cais.Load()
-	s, err := store.NewSQLiteStore(cfg.DBPath, cfg.Env)
+	s, err := openStore(cfg)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer func() { _ = s.Close() }()
 
-	if err := s.SeedDemo(); err != nil {
-		log.Fatal(err)
-	}
-
+	active := s
 	if err := console.Run(console.Options{
-		AppName: "PulseFit",
-		Config:  cfg,
-		Bindings: map[string]any{
-			"store": s,
-			"db":    s.DB(),
+		AppName:  "PulseFit",
+		Config:   cfg,
+		Bindings: bindings(active),
+		Reload: func() (map[string]any, error) {
+			_ = active.Close()
+			next, err := openStore(cfg)
+			if err != nil {
+				return nil, err
+			}
+			active = next
+			return bindings(active), nil
 		},
 	}); err != nil {
 		log.Fatal(err)
