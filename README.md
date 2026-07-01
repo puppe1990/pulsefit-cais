@@ -30,6 +30,7 @@ Unauthenticated visits redirect to `/login`.
 git clone https://github.com/puppe1990/pulsefit-cais.git
 cd pulsefit-cais
 go install github.com/puppe1990/cais/cmd/cais@v0.3.1
+export PATH="$HOME/go/bin:$PATH"   # add to ~/.zshrc to persist
 cais install   # npm install + go mod tidy
 cais dev       # http://localhost:8080
 cais test      # full test suite
