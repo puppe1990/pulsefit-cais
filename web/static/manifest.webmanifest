@@ -1,11 +1,11 @@
 {
-  "name": "pulsefit",
-  "short_name": "pulsefit",
-  "description": "pulsefit — powered by Cais",
+  "name": "PulseFit",
+  "short_name": "PulseFit",
+  "description": "PulseFit — track workouts and routines",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#4f46e5",
+  "background_color": "#000000",
+  "theme_color": "#CCFF00",
   "orientation": "portrait-primary",
   "icons": [
     {

@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="App icon">
-  <rect width="512" height="512" rx="96" fill="#4f46e5"/>
-  <path fill="#fff" d="M128 352V160h72c44 0 76 28 76 72s-32 72-76 72h-36v48H128zm64-120h28c20 0 32-12 32-28s-12-28-32-28h-28v56zm120 120v-48h36l52-144h56l-60 168c-12 32-36 48-68 48h-16z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PulseFit">
+  <rect width="512" height="512" rx="112" fill="#CCFF00" />
+  <defs>
+    <linearGradient id="bolt" x1="30%" y1="0%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#FFFDE7" />
+      <stop offset="45%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FF8F00" />
+    </linearGradient>
+  </defs>
+  <path
+    fill="url(#bolt)"
+    stroke="#FFFFFF"
+    stroke-width="10"
+    stroke-linejoin="round"
+    d="M292 88 168 292h84l-52 132 196-260h-92l-12-76z"
+  />
 </svg>
