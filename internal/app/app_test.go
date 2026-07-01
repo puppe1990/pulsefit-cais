@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/puppe1990/cais/pkg/cais"
+
 	"github.com/puppe1990/pulsefit/internal/store"
 	"github.com/puppe1990/pulsefit/web"
 )
