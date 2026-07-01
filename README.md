@@ -29,7 +29,7 @@ Unauthenticated visits redirect to `/login`.
 ```bash
 git clone https://github.com/puppe1990/pulsefit-cais.git
 cd pulsefit-cais
-go install github.com/puppe1990/cais/cmd/cais@v0.3.2
+go install github.com/puppe1990/cais/cmd/cais@v0.3.3
 export PATH="$HOME/go/bin:$PATH"   # add to ~/.zshrc to persist
 cais install   # npm install + go mod tidy
 cais dev       # http://localhost:8080
@@ -38,7 +38,7 @@ cais test      # full test suite
 
 ## Stack
 
-- **Go** + [Cais](https://github.com/puppe1990/cais) v0.3.2 (session auth, HTMX, Rails-style logs)
+- **Go** + [Cais](https://github.com/puppe1990/cais) v0.3.3 (session auth, HTMX, Rails-style logs)
 - **SQLite** via `modernc.org/sqlite`
 - **Tailwind CSS** v3
 
