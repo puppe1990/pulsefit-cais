@@ -4,10 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
 	"github.com/puppe1990/cais/pkg/cais"
+	"github.com/puppe1990/cais/pkg/cais/devlog"
 	"github.com/puppe1990/cais/pkg/cais/middleware"
 	"github.com/puppe1990/cais/pkg/cais/session"
 	"github.com/puppe1990/pulsefit/internal/store"
@@ -39,12 +41,18 @@ func New(cfg cais.Config, deps Deps) (*App, error) {
 	}
 
 	r := cais.NewRouter()
+	buf := devlog.Prepare(cfg.Env)
 	if cfg.Env == "development" {
 		r.Use(middleware.Recover)
-		r.Use(middleware.Logger)
+		if buf != nil {
+			r.Use(middleware.LoggerTo(devlog.MirrorDefault(log.Writer())))
+		} else {
+			r.Use(middleware.Logger)
+		}
 	}
 	r.Static("/static", deps.StaticDir)
 	registerRoutes(r, deps)
+	devlog.Register(r, cfg.Env, buf)
 	r.Get("/health", healthHandler)
 
 	return &App{

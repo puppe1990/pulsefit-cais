@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/puppe1990/cais/pkg/cais/devlog"
 	"github.com/puppe1990/cais/pkg/cais/sqllog"
 	"github.com/puppe1990/pulsefit/internal/models"
 	_ "modernc.org/sqlite"
@@ -55,7 +56,11 @@ func NewSQLiteStore(dsn string, env string) (*SQLiteStore, error) {
 		return nil, err
 	}
 
-	return &SQLiteStore{db: sqllog.Wrap(db, sqllog.Config{Enabled: sqllog.EnabledForEnv(env)})}, nil
+	cfg := sqllog.Config{Enabled: sqllog.EnabledForEnv(env)}
+	if cfg.Enabled {
+		cfg.Writer = devlog.MirrorDefault(os.Stdout)
+	}
+	return &SQLiteStore{db: sqllog.Wrap(db, cfg)}, nil
 }
 
 func (s *SQLiteStore) DB() *sql.DB {

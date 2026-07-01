@@ -3,7 +3,7 @@ module github.com/puppe1990/pulsefit
 go 1.26.4
 
 require (
-	github.com/puppe1990/cais v0.4.1
+	github.com/puppe1990/cais v0.4.2
 	modernc.org/sqlite v1.53.0
 )
 
