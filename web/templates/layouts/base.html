@@ -25,14 +25,13 @@
     <link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="/static/icons/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
-    <meta name="theme-color" content="#CCFF00" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    {{ template "pwa_head" . }}
     <script src="/static/js/htmx.min.js" defer></script>
     <script src="/static/js/password-toggle.js" defer></script>
   </head>
   <body class="bg-pulse-black text-pulse-gray min-h-dvh">
     {{ template "content" . }}
+    {{ template "pwa_register" . }}
   </body>
 </html>
 {{ end }}
@@ -62,12 +61,7 @@
     <link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="/static/icons/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/static/icons/icon-192.png" />
-    <link rel="manifest" href="/static/manifest.webmanifest" />
-    <meta name="theme-color" content="#CCFF00" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="PulseFit" />
+    {{ template "pwa_head" . }}
     <script src="/static/js/htmx.min.js" defer></script>
   </head>
   <body class="bg-pulse-black text-pulse-gray min-h-dvh md:h-dvh md:overflow-hidden flex flex-col">
@@ -153,8 +147,26 @@
         </a>
       </div>
     </nav>
+    {{ template "pwa_register" . }}
   </body>
 </html>
+{{ end }}
+
+{{ define "pwa_head" }}
+<link rel="manifest" href="/static/manifest.webmanifest" />
+<meta name="theme-color" content="#CCFF00" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="PulseFit" />
+{{ end }}
+
+{{ define "pwa_register" }}
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/static/js/sw.js", { scope: "/" });
+  }
+</script>
 {{ end }}
 
 {{ define "password_input" }}
